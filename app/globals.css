@@ -139,3 +139,226 @@ div,
     display: none !important;
   }
 }
+
+/* --------------------------------------------------
+ * 1. REMOVE 2-LINE MENU ICON (#btn-extra)
+ * -------------------------------------------------- */
+#btn-extra,
+#btn-extra * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* --------------------------------------------------
+ * 2. RESPONSIVE HEADER & MOBILE HAMBURGER MENU
+ * -------------------------------------------------- */
+#menu-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  display: none; /* Hidden on desktop */
+  outline: none;
+  z-index: 1001;
+  border-radius: 4px;
+}
+
+#menu-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px 0;
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+header.header-light #menu-btn span {
+  background-color: #ffffff;
+}
+
+/* Mobile Hamburger transform to 'X' close when open */
+#menu-btn.menu-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+#menu-btn.menu-open span:nth-child(2) {
+  opacity: 0;
+}
+#menu-btn.menu-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 991.98px) {
+  #menu-btn {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: rgba(18, 16, 14, 0.98) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  header.menu-open {
+    height: 100vh !important;
+    overflow-y: auto;
+  }
+
+  .header-col-mid #mainmenu {
+    display: none;
+    position: static;
+    width: 100%;
+    background: transparent;
+    padding: 20px 0;
+    margin: 0;
+  }
+
+  header.menu-open .header-col-mid #mainmenu,
+  .header-col-mid #mainmenu.mobile-active {
+    display: block !important;
+  }
+
+  #mainmenu li {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 0;
+  }
+
+  #mainmenu li a.menu-item {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 4px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  #mainmenu li a.menu-item:hover,
+  #mainmenu li a.menu-item.active {
+    color: #b89368 !important;
+    background: rgba(184, 147, 104, 0.1);
+  }
+
+  #mainmenu li ul {
+    position: static !important;
+    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    padding-left: 15px !important;
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  #mainmenu li ul li {
+    border-bottom: none !important;
+    padding: 4px 0 !important;
+  }
+
+  #mainmenu li ul li a {
+    color: #d1d1d1 !important;
+    font-size: 14px;
+    padding: 8px 12px;
+    display: block;
+  }
+
+  #mainmenu li ul li a:hover,
+  #mainmenu li ul li a.active {
+    color: #b89368 !important;
+  }
+
+  .submenu-arrow {
+    font-size: 10px;
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+  }
+}
+
+/* --------------------------------------------------
+ * 3. FINE-TUNED RESPONSIVE SCREEN ADJUSTMENTS
+ * -------------------------------------------------- */
+/* Tablets & Mobile (Max 767.98px) */
+@media (max-width: 767.98px) {
+  /* Header logo & CTA button scaling */
+  #logo img.logo-main,
+  #logo img.logo-scroll,
+  #logo img.logo-mobile {
+    max-height: 28px !important;
+    width: auto !important;
+  }
+
+  .menu_side_area .btn-main {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* Section Padding for compact mobile view */
+  section {
+    padding: 50px 0 !important;
+  }
+
+  .jarallax-container,
+  #subheader {
+    padding: 90px 0 40px 0 !important;
+    min-height: auto !important;
+  }
+
+  #subheader h1 {
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Footer responsiveness */
+  footer {
+    padding: 40px 0 20px 0 !important;
+  }
+
+  footer .col-md-3,
+  footer .col-md-4,
+  footer .col-md-6 {
+    margin-bottom: 25px;
+  }
+}
+
+/* Extra Small Phones (Max 480px) */
+@media (max-width: 480px) {
+  .menu_side_area .btn-main span {
+    font-size: 11px !important;
+  }
+
+  .menu_side_area .btn-main {
+    padding: 6px 10px !important;
+  }
+
+  #logo img {
+    max-height: 24px !important;
+  }
+
+  h1, .h1 {
+    font-size: 26px !important;
+  }
+
+  h2, .h2 {
+    font-size: 22px !important;
+  }
+}
+

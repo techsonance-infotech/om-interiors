@@ -1,13 +1,49 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPagesOpen, setIsPagesOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // Automatically close mobile menu on page transition
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsPagesOpen(false);
+  }, [pathname]);
+
+  // Handle header sticky class on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const togglePagesSubmenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsPagesOpen((prev) => !prev);
+  };
+
   return (
-    <header className="transparent">
+    <header className={`transparent ${isScrolled ? "header-sticky header-light header-bg" : ""} ${isMobileMenuOpen ? "menu-open" : ""}`}>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="de-flex sm-pt10">
+            <div className="de-flex sm-pt10 align-items-center justify-content-between">
               <div className="de-flex-col">
                 {/* logo begin */}
                 <div id="logo">
@@ -24,45 +60,83 @@ export default function Header() {
                 </div>
                 {/* logo end */}
               </div>
-              <div className="de-flex-col header-col-mid">
+
+              <div className={`de-flex-col header-col-mid ${isMobileMenuOpen ? "open" : ""}`}>
                 {/* mainmenu begin */}
-                <ul id="mainmenu">
+                <ul id="mainmenu" className={isMobileMenuOpen ? "mobile-active" : ""}>
                   <li>
-                    <Link className="menu-item" href="/">Home</Link>
+                    <Link className={`menu-item ${pathname === "/" ? "active" : ""}`} href="/">
+                      Home
+                    </Link>
                   </li>
                   <li>
-                    <Link className="menu-item" href="/services">Services</Link>
+                    <Link className={`menu-item ${pathname === "/services" ? "active" : ""}`} href="/services">
+                      Services
+                    </Link>
                   </li>
                   <li>
-                    <Link className="menu-item" href="/projects">Projects</Link>
+                    <Link className={`menu-item ${pathname === "/projects" ? "active" : ""}`} href="/projects">
+                      Projects
+                    </Link>
                   </li>
-                  <li>
-                    <a className="menu-item" href="#">Pages</a>
-                    <ul>
-                      <li><Link href="/about">About Us</Link></li>
-                      <li><Link href="/faq">FAQ</Link></li>
-                      <li><Link href="/testimonials">Testimonials</Link></li>
+                  <li className={`has-child ${isPagesOpen ? "open-sub" : ""}`}>
+                    <a className="menu-item" href="#" onClick={togglePagesSubmenu}>
+                      Pages <span className="submenu-arrow">{isPagesOpen ? "▲" : "▼"}</span>
+                    </a>
+                    <ul style={{ display: isPagesOpen ? "block" : undefined }}>
+                      <li>
+                        <Link className={pathname === "/about" ? "active" : ""} href="/about">
+                          About Us
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className={pathname === "/faq" ? "active" : ""} href="/faq">
+                          FAQ
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className={pathname === "/testimonials" ? "active" : ""} href="/testimonials">
+                          Testimonials
+                        </Link>
+                      </li>
                     </ul>
                   </li>
                   <li>
-                    <Link className="menu-item" href="/gallery">Gallery</Link>
+                    <Link className={`menu-item ${pathname === "/gallery" ? "active" : ""}`} href="/gallery">
+                      Gallery
+                    </Link>
                   </li>
-                  <li><Link className="menu-item" href="/blog">Blog</Link></li>
-                  <li><Link className="menu-item" href="/contact">Contact</Link></li>
+                  <li>
+                    <Link className={`menu-item ${pathname === "/blog" ? "active" : ""}`} href="/blog">
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className={`menu-item ${pathname === "/contact" ? "active" : ""}`} href="/contact">
+                      Contact
+                    </Link>
+                  </li>
                 </ul>
                 {/* mainmenu end */}
               </div>
+
               <div className="de-flex-col">
-                <div className="menu_side_area">
+                <div className="menu_side_area d-flex align-items-center gap-2">
                   <Link href="/consultation" className="btn-main fx-slide">
                     <span>Free Consultation</span>
                   </Link>
-                  <span id="menu-btn"></span>
-                </div>
 
-                <div id="btn-extra">
-                  <span></span>
-                  <span></span>
+                  <button 
+                    id="menu-btn" 
+                    type="button" 
+                    className={`menu-toggle-btn ${isMobileMenuOpen ? "menu-open" : ""}`}
+                    onClick={toggleMobileMenu}
+                    aria-label="Toggle navigation menu"
+                  >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
                 </div>
               </div>
             </div>
