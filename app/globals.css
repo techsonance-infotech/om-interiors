@@ -141,24 +141,40 @@ div,
 }
 
 /* --------------------------------------------------
- * 1. SUPPRESS DOUBLE ARROWS ON PAGES MENU
+ * 1. ABSOLUTE SINGLE ARROW FIX FOR PAGES MENU
  * -------------------------------------------------- */
+/* Hide all extra dynamically injected spans, <a> pseudo elements, and duplicates */
+#mainmenu li a + span,
+#mainmenu li.has-child > span,
+#mainmenu li.menu-item-has-children > span,
 #mainmenu > li > a.menu-item:after,
-#mainmenu > li.has-child > a.menu-item:after,
-#mainmenu > li.menu-item-has-children > a.menu-item:after,
-#mainmenu > li > a:after,
-#mainmenu li a + span {
+#mainmenu > li.has-child > a:after,
+#mainmenu > li.menu-item-has-children > a:after,
+.custom-arrow-icon {
   display: none !important;
   content: "" !important;
 }
 
-.custom-arrow-icon {
-  font-size: 11px;
-  margin-left: 6px;
-  display: inline-block;
-  transition: transform 0.2s ease;
-  vertical-align: middle;
+/* Ensure exactly ONE clean dropdown chevron icon appears on Pages menu item */
+#mainmenu li.has-child > a.menu-item {
+  position: relative !important;
+  padding-right: 18px !important;
 }
+
+#mainmenu li.has-child > a.menu-item::after {
+  content: "\f107" !important;
+  font-family: "FontAwesome" !important;
+  font-size: 11px !important;
+  margin-left: 6px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  opacity: 0.8 !important;
+}
+
 
 /* --------------------------------------------------
  * 2. 2-STROKE MENU TOGGLE BUTTON (#menu-btn)

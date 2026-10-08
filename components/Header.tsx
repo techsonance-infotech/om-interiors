@@ -81,7 +81,7 @@ export default function Header() {
                   </li>
                   <li className={`has-child ${isPagesOpen ? "open-sub" : ""}`}>
                     <a className="menu-item" href="#" onClick={togglePagesSubmenu}>
-                      Pages <span className="custom-arrow-icon">{isPagesOpen ? "▴" : "▾"}</span>
+                      Pages
                     </a>
                     <ul className={isPagesOpen ? "show-mobile-sub" : ""}>
                       <li>
