@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FAQSchema from "@/components/schema/FAQSchema";
+import Counter from "@/components/Counter";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -160,25 +161,25 @@ export default function Home() {
             <div className="row g-4">
               <div className="col-md-3 col-sm-6">
                 <div className="de_count wow fadeInRight" data-wow-delay=".0s">
-                  <h3 className="fs-40 mb-0"><span className="timer" data-to="1500" data-speed="3000">0</span>+</h3>
+                  <h3 className="fs-40 mb-0"><Counter end={1500} duration={2200} /></h3>
                   Design Hours Completed
                 </div>
               </div>
               <div className="col-md-3 col-sm-6">
                 <div className="de_count wow fadeInRight" data-wow-delay=".2s">
-                  <h3 className="fs-40 mb-0"><span className="timer" data-to="75" data-speed="3000">0</span>+</h3>
+                  <h3 className="fs-40 mb-0"><Counter end={75} duration={2200} /></h3>
                   Satisfied Clients
                 </div>
               </div>
               <div className="col-md-3 col-sm-6">
                 <div className="de_count wow fadeInRight" data-wow-delay=".4s">
-                  <h3 className="fs-40 mb-0"><span className="timer" data-to="10" data-speed="3000">0</span>+</h3>
+                  <h3 className="fs-40 mb-0"><Counter end={10} duration={2200} /></h3>
                   Awards &amp; Recognitions
                 </div>
               </div>
               <div className="col-md-3 col-sm-6">
                 <div className="de_count wow fadeInRight" data-wow-delay=".6s">
-                  <h3 className="fs-40 mb-0"><span className="timer" data-to="4" data-speed="3000">0</span>+</h3>
+                  <h3 className="fs-40 mb-0"><Counter end={4} duration={2200} /></h3>
                   Years of Design Experience
                 </div>
               </div>
