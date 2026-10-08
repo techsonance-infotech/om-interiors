@@ -1,15 +1,31 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import JarallaxSection from "@/components/JarallaxSection";
 import PageLoaderWrapper from "@/components/PageLoaderWrapper";
+import BreadcrumbSchema from "@/components/schema/BreadcrumbSchema";
+import { siteConfig } from "@/config/site";
 
-export const metadata = {
-  title: "About Us — Om Interiors",
-  description: "Learn more about Om Interiors team, craft, and design vision.",
+export const metadata: Metadata = {
+  title: "About OM Interior | Interior Design Studio in Surat, Gujarat",
+  description:
+    "Learn about OM Interior — a leading interior design studio in Surat, Gujarat. We create tailored residential and commercial interiors combining timeless design, space planning, and luxury execution.",
+  alternates: {
+    canonical: `${siteConfig.url}/about`,
+  },
+  openGraph: {
+    title: "About OM Interior | Interior Design Studio in Surat, Gujarat",
+    description:
+      "Learn about OM Interior — a leading interior design studio in Surat, Gujarat. We create tailored residential and commercial interiors combining timeless design, space planning, and luxury execution.",
+    url: `${siteConfig.url}/about`,
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
+  },
 };
 
 export default function AboutPage() {
   return (
     <PageLoaderWrapper label="OM INTERIORS ABOUT">
+      <BreadcrumbSchema items={[{ name: "About Us", url: "/about" }]} />
       <main>
         <a href="#" id="back-to-top"></a>
 

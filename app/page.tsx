@@ -1,8 +1,48 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import FAQSchema from "@/components/schema/FAQSchema";
+import { siteConfig } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: "Best Interior Designer in Surat, Gujarat | OM Interior Studio",
+  description:
+    "OM Interior is a premier interior design studio in Surat, Gujarat. Specialized in luxury residential home interiors, 2/3/4 BHK apartments, modular kitchens, and office interiors across Vesu, Adajan, Pal, and City Light.",
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  openGraph: {
+    title: "Best Interior Designer in Surat, Gujarat | OM Interior Studio",
+    description:
+      "OM Interior is a premier interior design studio in Surat, Gujarat. Specialized in luxury residential home interiors, 2/3/4 BHK apartments, modular kitchens, and office interiors.",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
+  },
+};
+
+const homeFaqs = [
+  {
+    question: "Why hire OM Interior as your interior designer in Surat?",
+    answer:
+      "OM Interior delivers full-service residential and commercial interior design in Surat, Gujarat. From space planning and 3D visual concepts to material selection and turnkey execution, we craft functional, luxury interiors tailored to your lifestyle.",
+  },
+  {
+    question: "Which areas in Surat does OM Interior serve?",
+    answer:
+      "OM Interior provides interior design services across all major localities in Surat, Gujarat including Vesu, Adajan, Pal, City Light, Piplod, Althan, Bhatar, Athwa, and Varachha.",
+  },
+  {
+    question: "What interior design services are offered in Surat?",
+    answer:
+      "We specialize in complete residential interior design (2 BHK, 3 BHK, 4 BHK, luxury apartments, and bungalows), custom modular kitchen design, living room and bedroom interiors, furniture curation, space planning, and commercial office interiors.",
+  },
+];
 
 export default function Home() {
+
   return (
     <>
+      <FAQSchema faqs={homeFaqs} />
       <main>
         <a href="#" id="back-to-top"></a>
 

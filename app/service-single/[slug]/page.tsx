@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { servicesData } from "@/lib/servicesData";
 import JarallaxSection from "@/components/JarallaxSection";
 import PageLoaderWrapper from "@/components/PageLoaderWrapper";
+import ServiceSchema from "@/components/schema/ServiceSchema";
+import BreadcrumbSchema from "@/components/schema/BreadcrumbSchema";
+import { siteConfig } from "@/config/site";
 
 interface PageProps {
   params: Promise<{
@@ -10,19 +14,32 @@ interface PageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const service = servicesData[resolvedParams.slug];
 
   if (!service) {
     return {
-      title: "Service Details — Om Interiors",
+      title: "Service Details | OM Interior Studio Surat",
     };
   }
 
+  const pageTitle = `${service.title} in Surat | OM Interior Studio`;
+  const canonicalUrl = `${siteConfig.url}/service-single/${resolvedParams.slug}`;
+
   return {
-    title: `${service.title} — Om Interiors`,
+    title: pageTitle,
     description: service.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: pageTitle,
+      description: service.description,
+      url: canonicalUrl,
+      siteName: siteConfig.name,
+      images: [{ url: service.heroImage ? `${siteConfig.url}${service.heroImage}` : siteConfig.ogImage }],
+    },
   };
 }
 
@@ -40,8 +57,22 @@ export default async function DynamicServiceSinglePage({ params }: PageProps) {
     notFound();
   }
 
+  const pageUrl = `/service-single/${resolvedParams.slug}`;
+
   return (
     <PageLoaderWrapper label={service.title}>
+      <ServiceSchema
+        name={service.title}
+        description={service.description}
+        url={pageUrl}
+        image={service.heroImage}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Services", url: "/services" },
+          { name: service.title, url: pageUrl },
+        ]}
+      />
       <main>
         <a href="#" id="back-to-top"></a>
 

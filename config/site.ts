@@ -1,0 +1,57 @@
+export const siteConfig = {
+  name: "OM Interior",
+  legalName: "OM Interior Design Studio",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://om-interior.in",
+  ogImage: "https://om-interior.in/images/om-interior.png",
+  description:
+    "Leading interior design studio in Surat, Gujarat. Specialized in luxury residential home interiors, modular kitchens, living rooms, bedrooms, and commercial office design.",
+  telephone: "+91-7990114574",
+  email: "studio@om-interior.in",
+  address: {
+    streetAddress: "Surat, Gujarat, India",
+    addressLocality: "Surat",
+    addressRegion: "Gujarat",
+    postalCode: "395007",
+    addressCountry: "IN",
+  },
+  geo: {
+    latitude: "21.1702",
+    longitude: "72.8311",
+  },
+  serviceAreas: [
+    "Surat",
+    "Vesu",
+    "Adajan",
+    "Pal",
+    "City Light",
+    "Piplod",
+    "Althan",
+    "Dumas",
+    "Bhatar",
+    "Athwa",
+    "Katargam",
+    "Varachha",
+    "Gujarat",
+  ],
+  socialLinks: [
+    "https://www.instagram.com/_om.interiors_?stkn=Mjd3cmx1bHgzOGNr",
+    "https://wa.me/917990114574",
+  ],
+  keywords: [
+    "interior designer in Surat",
+    "interior designers in Surat",
+    "best interior designer in Surat",
+    "interior design company in Surat",
+    "home interior designer in Surat",
+    "residential interior designer in Surat",
+    "modular kitchen designer Surat",
+    "office interior designer Surat",
+    "luxury interior design Surat",
+    "living room interior designer Surat",
+    "bedroom interior designer Surat",
+    "2 BHK interior design Surat",
+    "3 BHK interior design Surat",
+  ],
+};
+
+export type SiteConfig = typeof siteConfig;
