@@ -26,34 +26,43 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="col-lg-4 offset-lg-1">
+                  <div className="col-lg-5 offset-lg-1">
                     <p className="wow fadeInLeft" data-wow-delay=".4s">
                       We design refined interiors that blend comfort and style, creating spaces that feel inviting and functional while reflecting your personality with thoughtful details and timeless elegance.
                     </p>
+                    <div className="mt-4 wow fadeInUp d-flex flex-wrap gap-3" data-wow-delay=".6s">
+                      <Link href="/projects" className="btn-main fx-slide">
+                        <span>View Projects</span>
+                      </Link>
+                      <Link href="/consultation" className="btn-line">
+                        <span>Free Consultation</span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="abs w-100 bottom-0 z-2 pb-4 sm-hide">
+            <div className="abs w-100 bottom-0 z-2 pb-4 hero-features-bar">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12">
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex flex-wrap justify-content-between align-items-center gap-2">
                       <div className="wow fadeInRight" data-wow-delay=".8s">
-                        Functional Space Planning
+                        ✨ Functional Space Planning
                       </div>
                       <div className="wow fadeInRight" data-wow-delay="1s">
-                        Stylish Material Selection
+                        ✨ Stylish Material Selection
                       </div>
                       <div className="wow fadeInRight" data-wow-delay="1.2s">
-                        Tailored Design Concepts
+                        ✨ Tailored Design Concepts
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
 
             <div className="swiper" data-0="transform: scale(1);" data-800="transform: scale(1.5);" suppressHydrationWarning>
               <div className="swiper-wrapper">

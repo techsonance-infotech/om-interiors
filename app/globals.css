@@ -141,131 +141,152 @@ div,
 }
 
 /* --------------------------------------------------
- * 1. REMOVE 2-LINE MENU ICON (#btn-extra)
+ * 1. SUPPRESS DOUBLE ARROWS ON PAGES MENU
+ * -------------------------------------------------- */
+#mainmenu > li > a.menu-item:after,
+#mainmenu > li.has-child > a.menu-item:after,
+#mainmenu > li.menu-item-has-children > a.menu-item:after,
+#mainmenu > li > a:after,
+#mainmenu li a + span {
+  display: none !important;
+  content: "" !important;
+}
+
+.custom-arrow-icon {
+  font-size: 11px;
+  margin-left: 6px;
+  display: inline-block;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+/* --------------------------------------------------
+ * 2. 2-STROKE MENU TOGGLE BUTTON (#menu-btn)
  * -------------------------------------------------- */
 #btn-extra,
 #btn-extra * {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
-/* --------------------------------------------------
- * 2. RESPONSIVE HEADER & MOBILE HAMBURGER MENU
- * -------------------------------------------------- */
-#menu-btn {
+#menu-btn.two-stroke-btn {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px 10px;
-  display: none; /* Hidden on desktop */
+  padding: 6px;
+  z-index: 1000001;
   outline: none;
-  z-index: 1001;
-  border-radius: 4px;
 }
 
-#menu-btn span {
+#menu-btn.two-stroke-btn span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
-  margin: 5px 0;
+  margin: 3px 0;
   background-color: #ffffff;
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   border-radius: 2px;
 }
 
-header.header-light #menu-btn span {
-  background-color: #ffffff;
+/* Transform 2 strokes into 'X' close icon when mobile menu is open */
+#menu-btn.two-stroke-btn.menu-open span:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+#menu-btn.two-stroke-btn.menu-open span:nth-child(2) {
+  transform: translateY(-4px) rotate(-45deg);
 }
 
-/* Mobile Hamburger transform to 'X' close when open */
-#menu-btn.menu-open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-#menu-btn.menu-open span:nth-child(2) {
-  opacity: 0;
-}
-#menu-btn.menu-open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-@media (max-width: 991.98px) {
-  #menu-btn {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@media (min-width: 992px) {
+  #menu-btn.two-stroke-btn {
+    display: none !important;
   }
+}
 
-  header {
+/* --------------------------------------------------
+ * 3. LUXURY FULL-SCREEN MOBILE MENU OVERLAY DESIGN
+ * -------------------------------------------------- */
+@media (max-width: 991.98px) {
+  header.menu-open {
     position: fixed !important;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 9999;
-    background: rgba(18, 16, 14, 0.98) !important;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #14110e !important;
+    z-index: 999999 !important;
+    overflow-y: auto !important;
+    padding-bottom: 40px;
   }
 
-  header.menu-open {
-    height: 100vh !important;
-    overflow-y: auto;
+  header.menu-open .de-flex {
+    align-items: center !important;
   }
 
   .header-col-mid #mainmenu {
     display: none;
-    position: static;
-    width: 100%;
-    background: transparent;
-    padding: 20px 0;
-    margin: 0;
   }
 
   header.menu-open .header-col-mid #mainmenu,
   .header-col-mid #mainmenu.mobile-active {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 80px) !important;
+    background: #14110e !important;
+    padding: 20px 24px 60px 24px !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    z-index: 999999 !important;
   }
 
   #mainmenu li {
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 8px 0;
+    display: block !important;
+    width: 100% !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   #mainmenu li a.menu-item {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
     color: #ffffff !important;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    border-radius: 4px;
-    transition: background 0.2s ease, color 0.2s ease;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 16px 8px !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    transition: color 0.2s ease;
   }
 
   #mainmenu li a.menu-item:hover,
   #mainmenu li a.menu-item.active {
     color: #b89368 !important;
-    background: rgba(184, 147, 104, 0.1);
   }
 
   #mainmenu li ul {
+    display: none !important;
     position: static !important;
     box-shadow: none !important;
-    background: rgba(0, 0, 0, 0.3) !important;
-    padding-left: 15px !important;
-    border-radius: 6px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    background: rgba(0, 0, 0, 0.4) !important;
+    padding: 8px 16px !important;
+    margin: 0 0 12px 0 !important;
+    border-left: 2px solid #b89368 !important;
+  }
+
+  #mainmenu li ul.show-mobile-sub {
+    display: block !important;
   }
 
   #mainmenu li ul li {
@@ -275,9 +296,10 @@ header.header-light #menu-btn span {
 
   #mainmenu li ul li a {
     color: #d1d1d1 !important;
-    font-size: 14px;
-    padding: 8px 12px;
-    display: block;
+    font-size: 14px !important;
+    letter-spacing: 1px !important;
+    padding: 10px 8px !important;
+    display: block !important;
   }
 
   #mainmenu li ul li a:hover,
@@ -285,30 +307,59 @@ header.header-light #menu-btn span {
     color: #b89368 !important;
   }
 
-  .submenu-arrow {
-    font-size: 10px;
-    margin-left: 8px;
-    transition: transform 0.2s ease;
+  .btn-mobile-drawer-cta {
+    display: block !important;
+    width: 100% !important;
+    background: #b89368 !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 15px rgba(184, 147, 104, 0.3);
+    margin-top: 10px;
   }
 }
 
 /* --------------------------------------------------
- * 3. FINE-TUNED RESPONSIVE SCREEN ADJUSTMENTS
+ * 4. HERO SECTION MOBILE OPTIMIZATIONS
  * -------------------------------------------------- */
-/* Tablets & Mobile (Max 767.98px) */
 @media (max-width: 767.98px) {
-  /* Header logo & CTA button scaling */
+  .hero-features-bar {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 30px !important;
+    background: rgba(18, 16, 14, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 16px 12px !important;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hero-features-bar div {
+    font-size: 13px !important;
+    font-weight: 500;
+    color: #e2d3c2 !important;
+    padding: 4px 0;
+  }
+
+  #section-intro .mh-800 {
+    min-height: 560px !important;
+    height: auto !important;
+    padding-top: 100px !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* Header logo scaling on mobile */
   #logo img.logo-main,
   #logo img.logo-scroll,
   #logo img.logo-mobile {
     max-height: 28px !important;
     width: auto !important;
-  }
-
-  .menu_side_area .btn-main {
-    padding: 8px 14px !important;
-    font-size: 12px !important;
-    letter-spacing: 0.5px !important;
   }
 
   /* Section Padding for compact mobile view */
@@ -341,14 +392,6 @@ header.header-light #menu-btn span {
 
 /* Extra Small Phones (Max 480px) */
 @media (max-width: 480px) {
-  .menu_side_area .btn-main span {
-    font-size: 11px !important;
-  }
-
-  .menu_side_area .btn-main {
-    padding: 6px 10px !important;
-  }
-
   #logo img {
     max-height: 24px !important;
   }
@@ -361,4 +404,30 @@ header.header-light #menu-btn span {
     font-size: 22px !important;
   }
 }
+
+/* --------------------------------------------------
+ * 5. INTRIO REFERENCE THEME HEADER & FOOTER COLORS (#34241C)
+ * -------------------------------------------------- */
+footer,
+footer.text-light,
+footer.footer-light,
+footer.bg-dark-1 {
+  background-color: #34241C !important;
+  color: #e2d3c2 !important;
+}
+
+footer .subfooter {
+  background-color: #281c15 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+header.header-sticky,
+header.header-light,
+header.header-bg {
+  background-color: rgba(52, 36, 28, 0.96) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
 

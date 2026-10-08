@@ -35,6 +35,7 @@ export default function Header() {
 
   const togglePagesSubmenu = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsPagesOpen((prev) => !prev);
   };
 
@@ -44,25 +45,24 @@ export default function Header() {
         <div className="row">
           <div className="col-md-12">
             <div className="de-flex sm-pt10 align-items-center justify-content-between">
+              {/* Logo Column */}
               <div className="de-flex-col">
-                {/* logo begin */}
                 <div id="logo">
                   <Link href="/" className="d-flex align-items-center gap-2">
-                    <img className="logo-main" src="/images/om-logo.png" alt="Om Emblem" style={{ height: "38px", width: "auto", filter: "brightness(0) invert(1)" }} />
+                    <img className="logo-main" src="/images/om-logo.png" alt="Om Emblem" style={{ height: "36px", width: "auto", filter: "brightness(0) invert(1)" }} />
                     <img className="logo-main" src="/images/om-interior.png" alt="Om Interiors Logo" style={{ filter: "brightness(0) invert(1)" }} />
 
-                    <img className="logo-scroll" src="/images/om-logo.png" alt="Om Emblem" style={{ height: "38px", width: "auto" }} />
+                    <img className="logo-scroll" src="/images/om-logo.png" alt="Om Emblem" style={{ height: "36px", width: "auto" }} />
                     <img className="logo-scroll" src="/images/om-interior.png" alt="Om Interiors Logo" />
 
                     <img className="logo-mobile" src="/images/om-logo.png" alt="Om Emblem" style={{ height: "32px", width: "auto" }} />
                     <img className="logo-mobile" src="/images/om-interior.png" alt="Om Interiors Logo" />
                   </Link>
                 </div>
-                {/* logo end */}
               </div>
 
+              {/* Navigation Column */}
               <div className={`de-flex-col header-col-mid ${isMobileMenuOpen ? "open" : ""}`}>
-                {/* mainmenu begin */}
                 <ul id="mainmenu" className={isMobileMenuOpen ? "mobile-active" : ""}>
                   <li>
                     <Link className={`menu-item ${pathname === "/" ? "active" : ""}`} href="/">
@@ -81,9 +81,9 @@ export default function Header() {
                   </li>
                   <li className={`has-child ${isPagesOpen ? "open-sub" : ""}`}>
                     <a className="menu-item" href="#" onClick={togglePagesSubmenu}>
-                      Pages <span className="submenu-arrow">{isPagesOpen ? "▲" : "▼"}</span>
+                      Pages <span className="custom-arrow-icon">{isPagesOpen ? "▴" : "▾"}</span>
                     </a>
-                    <ul style={{ display: isPagesOpen ? "block" : undefined }}>
+                    <ul className={isPagesOpen ? "show-mobile-sub" : ""}>
                       <li>
                         <Link className={pathname === "/about" ? "active" : ""} href="/about">
                           About Us
@@ -116,24 +116,31 @@ export default function Header() {
                       Contact
                     </Link>
                   </li>
+
+                  {/* Mobile CTA inside menu drawer */}
+                  <li className="d-block d-lg-none mt-4 border-0">
+                    <Link href="/consultation" className="btn-mobile-drawer-cta">
+                      Free Consultation
+                    </Link>
+                  </li>
                 </ul>
-                {/* mainmenu end */}
               </div>
 
+              {/* Side CTA & 2-Stroke Menu Toggle */}
               <div className="de-flex-col">
-                <div className="menu_side_area d-flex align-items-center gap-2">
-                  <Link href="/consultation" className="btn-main fx-slide">
+                <div className="menu_side_area d-flex align-items-center gap-3">
+                  <Link href="/consultation" className="btn-main fx-slide d-none d-lg-inline-block">
                     <span>Free Consultation</span>
                   </Link>
 
+                  {/* 2-Stroke Menu Toggle Button */}
                   <button 
                     id="menu-btn" 
                     type="button" 
-                    className={`menu-toggle-btn ${isMobileMenuOpen ? "menu-open" : ""}`}
+                    className={`two-stroke-btn ${isMobileMenuOpen ? "menu-open" : ""}`}
                     onClick={toggleMobileMenu}
                     aria-label="Toggle navigation menu"
                   >
-                    <span></span>
                     <span></span>
                     <span></span>
                   </button>
